@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="70" id="KGk-i7-Jjw" customClass="MessageCell" customModule="DrinkChopAdmin" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_fiber_manual_record_18pt" translatesAutoresizingMaskIntoConstraints="NO" id="1Zy-yM-xm2">
+                        <rect key="frame" x="8" y="28.5" width="13" height="13"/>
+                        <color key="tintColor" red="0.10980392156862745" green="0.56470588235294117" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="13" id="1HZ-xE-CaT"/>
+                            <constraint firstAttribute="width" secondItem="1Zy-yM-xm2" secondAttribute="height" multiplier="1:1" id="LDB-yv-Kp1"/>
+                        </constraints>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="barImg" translatesAutoresizingMaskIntoConstraints="NO" id="nCv-pP-foY">
+                        <rect key="frame" x="29" y="8" width="53" height="53"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="53" id="ZMA-HF-9Cl"/>
+                            <constraint firstAttribute="width" secondItem="nCv-pP-foY" secondAttribute="height" multiplier="1:1" id="n6S-eU-bO6"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:45PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="In2-Hz-bbc">
+                        <rect key="frame" x="204.5" y="27.5" width="107.5" height="14.5"/>
+                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                        <color key="textColor" red="0.89411764705882346" green="0.25098039215686274" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arsam" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8v8-Tg-B7J">
+                        <rect key="frame" x="90" y="8" width="107" height="53"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="8v8-Tg-B7J" secondAttribute="height" multiplier="144:71" id="KbT-1b-i5U"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.20784313730000001" green="0.51372549020000002" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="In2-Hz-bbc" secondAttribute="trailing" constant="8" id="7dZ-zh-0K8"/>
+                    <constraint firstItem="8v8-Tg-B7J" firstAttribute="leading" secondItem="nCv-pP-foY" secondAttribute="trailing" constant="8" id="Wz6-HO-K8S"/>
+                    <constraint firstItem="8v8-Tg-B7J" firstAttribute="bottom" secondItem="nCv-pP-foY" secondAttribute="bottom" id="fao-Be-9ri"/>
+                    <constraint firstItem="nCv-pP-foY" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="k8w-Wz-esD"/>
+                    <constraint firstItem="In2-Hz-bbc" firstAttribute="leading" secondItem="8v8-Tg-B7J" secondAttribute="trailing" constant="7.5" id="lmm-D5-cuV"/>
+                    <constraint firstItem="In2-Hz-bbc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="n7o-pB-uxK"/>
+                    <constraint firstItem="nCv-pP-foY" firstAttribute="leading" secondItem="1Zy-yM-xm2" secondAttribute="trailing" constant="8" id="r0X-TA-5Ih"/>
+                    <constraint firstItem="1Zy-yM-xm2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="sjR-zw-TYD"/>
+                    <constraint firstItem="8v8-Tg-B7J" firstAttribute="top" secondItem="nCv-pP-foY" secondAttribute="top" id="tsS-NH-sWD"/>
+                    <constraint firstItem="1Zy-yM-xm2" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="x8j-vV-xrS"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="MessageLabel" destination="8v8-Tg-B7J" id="Dm0-rc-s2N"/>
+                <outlet property="readImageView" destination="1Zy-yM-xm2" id="qKc-OE-ofU"/>
+                <outlet property="senderImageView" destination="nCv-pP-foY" id="dRT-bO-GrC"/>
+                <outlet property="timeLabel" destination="In2-Hz-bbc" id="Gf4-Yl-GaJ"/>
+            </connections>
+            <point key="canvasLocation" x="26" y="74"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="barImg" width="275" height="183"/>
+        <image name="ic_fiber_manual_record_18pt" width="18" height="18"/>
+    </resources>
+</document>
