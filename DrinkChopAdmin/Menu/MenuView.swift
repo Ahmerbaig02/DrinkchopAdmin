@@ -17,28 +17,59 @@ class MenuView: UIViewController {
     
     var MyAccountDetails:[String:Any]!
     
-    let titles:[String] = ["Statistics","Templates","Employee","Doorman","Messages","Baseline/Selection"]
-    
+    var titles:[String] = []
+    let adminTitles:[String] = ["Statistics","Templates", "Add Employee","Add Event","Add Happy Hour","Messages","Baseline/Selection", "Social Sites","Sign out"]
+    let bartenderTitles:[String] = ["Messages","Orders", "Sign out"]
+    let doormanTitles:[String] = ["Messages", "Covers","Sign out"]
     
     let textAligments:[NSTextAlignment] = [.left,.left,.left,.left,.left,.left,.left,.left,.left,.left,.left]
     
     let fontStyles:[UIFont] = [.systemFont(ofSize: 15, weight: UIFont.Weight.medium),.systemFont(ofSize: 15, weight: UIFont.Weight.medium),.systemFont(ofSize: 15, weight: UIFont.Weight.medium),.systemFont(ofSize: 15, weight: UIFont.Weight.medium),.systemFont(ofSize: 15, weight: UIFont.Weight.medium),.systemFont(ofSize: 15, weight: UIFont.Weight.medium),.systemFont(ofSize: 15, weight: UIFont.Weight.medium),.systemFont(ofSize: 15, weight: UIFont.Weight.medium),.systemFont(ofSize: 15, weight: UIFont.Weight.medium),.systemFont(ofSize: 15, weight: UIFont.Weight.medium),.systemFont(ofSize: 15, weight: UIFont.Weight.medium)]
     
-    let menuImages:[UIImage?] = [#imageLiteral(resourceName: "ic_credit_card"),#imageLiteral(resourceName: "ic_work"),#imageLiteral(resourceName: "ic_notification"),#imageLiteral(resourceName: "ic_settings"),#imageLiteral(resourceName: "ic_info_outline_white"),#imageLiteral(resourceName: "ic_phone"),#imageLiteral(resourceName: "ic_favorite"),#imageLiteral(resourceName: "ic_about"),#imageLiteral(resourceName: "ic_search"),#imageLiteral(resourceName: "ic_shopping_cart"),nil]
+    let menuImages:[UIImage?] = [nil,nil,nil,nil,nil,nil,nil,nil,nil,nil,nil]
     let BGColors:[UIColor] = [.clear,.clear,.clear,.clear,.clear,.clear,.clear,.clear,.clear,.clear,.clear]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         menuTable.estimatedRowHeight = 54.0
-        Name.text = "Ahmer Baig"
         
+        if DrinkUser.iUser.userType == "0" {
+            self.titles = adminTitles
+        } else if DrinkUser.iUser.userType == "1" {
+            self.titles = doormanTitles
+        } else if DrinkUser.iUser.userType == "2" {
+            self.titles = bartenderTitles
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.Name.text = DrinkUser.iUser.userName ?? ""
+        self.userImage.pin_setImage(from: URL(string: DrinkUser.iUser.userImage ?? ""))
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
         self.userImage.getRounded(cornerRaius: self.userImage.frame.width/2)
+    }
+    
+    func doLogout() {
+        UserDefaults.standard.set(false, forKey: isLoggedInDefaultID)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func showLogoutAlert() {
+        let confirm = UIAlertController(title: "Sign Out", message: "Are you sure you want to sign out?", preferredStyle: .alert)
+        confirm.addAction(UIAlertAction(title: "Sign out", style: .default, handler: { [weak self] (action) in
+            self!.doLogout()
+        }))
+        
+        confirm.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(confirm, animated: true, completion: nil)
     }
     
     func closeMenu() {
@@ -88,9 +119,18 @@ extension MenuView: UITableViewDelegate , UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        ID = (titles[indexPath.row] == "") ? "" : titles[indexPath.row]
-        closeMenu()
+        if titles[indexPath.row] == "Sign out" {
+            self.showLogoutAlert()
+        } else if titles[indexPath.row] == "Add Event" {
+            ID = "addEventHour,1"
+            closeMenu()
+        } else if titles[indexPath.row] == "Add Happy Hour" {
+            ID = "addEventHour,0"
+            closeMenu()
+        } else {
+            ID = (titles[indexPath.row] == "") ? "" : titles[indexPath.row]
+            closeMenu()
+        }
     }
     
 }

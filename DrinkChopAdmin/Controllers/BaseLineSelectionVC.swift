@@ -27,6 +27,18 @@ class BaseLineSelectionVC: UIViewController {
         setupPageController()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationsUtil.setSuperView(navController: self.navigationController!)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationsUtil.removeFromSuperView()
+    }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
@@ -36,17 +48,17 @@ class BaseLineSelectionVC: UIViewController {
     
     func setupControllers() {
         let baselineController = storyboard?.instantiateViewController(withIdentifier: "BaselineVC") as! BaselineVC
+        baselineController.parentController = self
         let selectionController = storyboard?.instantiateViewController(withIdentifier: "SelectionVC") as! SelectionVC
+        selectionController.parentController = self
         
         baselineSelectionControllers = [baselineController, selectionController]
     }
     
     func setupPageController() {
-        
         self.pageVC = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
         
         pageVC.delegate = self
-        pageVC.dataSource = self
         
         pageVC.setViewControllers([getViewController(index: 0)!], direction: UIPageViewControllerNavigationDirection.forward, animated: false, completion: nil)
         
@@ -58,7 +70,6 @@ class BaseLineSelectionVC: UIViewController {
     }
     
     func getViewController(index:Int) -> UIViewController?  {
-        
         if index == NSNotFound || index < 0 || index >= 2 {
             return nil
         }
@@ -84,25 +95,18 @@ class BaseLineSelectionVC: UIViewController {
 extension BaseLineSelectionVC: UIPageViewControllerDataSource,UIPageViewControllerDelegate  {
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        
         var Index = (viewController).view.tag
-        
         Index = Index - 1
-        
         return getViewController(index: Index)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        
         var Index = (viewController).view.tag
-        
         Index = Index + 1
-        
         return getViewController(index: Index)
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        
         if completed == true {
             
         }

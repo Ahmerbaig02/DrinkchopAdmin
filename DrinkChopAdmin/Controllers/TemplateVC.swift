@@ -17,10 +17,16 @@ class TemplateVC: UIViewController {
     @IBOutlet var thursdayBtn: UIButton!
     @IBOutlet var currentTemplateBtn: UIButton!
     
+    var btnCenter: CGPoint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         registerCell()
+        
+        addPanGesture(btn: self.saturdaysBtn)
+        addPanGesture(btn: self.thursdayBtn)
+        addPanGesture(btn: self.weekdaysBtn)
     }
     
     override func viewWillLayoutSubviews() {
@@ -28,6 +34,43 @@ class TemplateVC: UIViewController {
         
         self.peopleDoorView.getRounded(cornerRaius: 5)
         self.peopleDoorView.giveShadow(cornerRaius: 5)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationsUtil.setSuperView(navController: self.navigationController!)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationsUtil.removeFromSuperView()
+    }
+    
+    func addPanGesture(btn: UIButton) {
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(dragTemplateBtnGesture(_:)))
+        btn.addGestureRecognizer(gesture)
+    }
+    
+    @objc func dragTemplateBtnGesture(_ gesture: UIPanGestureRecognizer) {
+        guard let btn = gesture.view as? UIButton else {return}
+        let translation = gesture.translation(in: self.view)
+        
+        switch gesture.state {
+        case .began:
+            btnCenter = btn.center
+        case .changed:
+            btn.center = CGPoint(x: btn.center.x + translation.x, y: btn.center.y + translation.y)
+        case .ended:
+            if btn.bounds.intersects(self.currentTemplateBtn.bounds) {
+                self.currentTemplateBtn.setTitle(btn.currentTitle, for: .normal)
+            }
+            btn.center = btnCenter
+        default:
+            btn.center = btnCenter
+        }
+        gesture.setTranslation(CGPoint.zero, in: self.view)
     }
     
     func registerCell() {

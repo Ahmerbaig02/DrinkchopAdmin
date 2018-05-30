@@ -15,8 +15,26 @@
 		2EA09244208E367800F03781 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EA09242208E367800F03781 /* LaunchScreen.storyboard */; };
 		2EA0924F208E368100F03781 /* DrinkChopAdminTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA0924E208E368100F03781 /* DrinkChopAdminTests.swift */; };
 		2EA0925A208E368300F03781 /* DrinkChopAdminUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA09259208E368300F03781 /* DrinkChopAdminUITests.swift */; };
+		2EA8059B2093E06600FE024A /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA8059A2093E06600FE024A /* Models.swift */; };
+		870C5BD22097911300508CEA /* SocialSitesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870C5BD12097911300508CEA /* SocialSitesVC.swift */; };
+		870C5BD42097AD7600508CEA /* NewDrinkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870C5BD32097AD7600508CEA /* NewDrinkVC.swift */; };
+		870C5BD62097B90800508CEA /* NewMessageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870C5BD52097B90800508CEA /* NewMessageVC.swift */; };
+		870C5BD920984BF400508CEA /* CoverCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870C5BD720984BF400508CEA /* CoverCVC.swift */; };
+		870C5BDA20984BF400508CEA /* CoverCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 870C5BD820984BF400508CEA /* CoverCVC.xib */; };
 		8727DFEB208FADA40079CDA0 /* DrinkTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8727DFE9208FADA40079CDA0 /* DrinkTVC.swift */; };
 		8727DFEC208FADA40079CDA0 /* DrinkTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8727DFEA208FADA40079CDA0 /* DrinkTVC.xib */; };
+		8727DFF2209056360079CDA0 /* BourbonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8727DFEF209056350079CDA0 /* BourbonVC.swift */; };
+		8727DFF3209056360079CDA0 /* EditDrinkVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8727DFF0209056350079CDA0 /* EditDrinkVC.swift */; };
+		8727DFF4209056360079CDA0 /* ServingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8727DFF1209056350079CDA0 /* ServingVC.swift */; };
+		8727DFF7209056A20079CDA0 /* HyveDrinkCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8727DFF5209056A20079CDA0 /* HyveDrinkCVC.swift */; };
+		8727DFF8209056A20079CDA0 /* HyveDrinkCVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8727DFF6209056A20079CDA0 /* HyveDrinkCVC.xib */; };
+		873072EF20BB521F00376444 /* AddEventHourVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 873072EE20BB521F00376444 /* AddEventHourVC.swift */; };
+		8736E4D9209ABCA00033B4A9 /* BartenderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736E4D8209ABCA00033B4A9 /* BartenderVC.swift */; };
+		8736E4DC209ABD690033B4A9 /* OrdersTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8736E4DA209ABD680033B4A9 /* OrdersTVC.xib */; };
+		8736E4DD209ABD690033B4A9 /* OrdersTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8736E4DB209ABD690033B4A9 /* OrdersTVC.swift */; };
+		874837C9209973CC0079AC17 /* AddEmployeeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874837C8209973CC0079AC17 /* AddEmployeeVC.swift */; };
+		875B657D209CDDB200D9764A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 875B657C209CDDB200D9764A /* GoogleService-Info.plist */; };
+		875B6580209DE12400D9764A /* NotificationsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B657F209DE12400D9764A /* NotificationsUtil.swift */; };
 		87CD793C208F115800290E3F /* KYDrawerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CD793B208F115800290E3F /* KYDrawerController.swift */; };
 		87CD793F208F116C00290E3F /* KYEmbedMainControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CD793D208F116C00290E3F /* KYEmbedMainControllerSegue.swift */; };
 		87CD7940208F116C00290E3F /* KYEmbedDrawerControllerSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CD793E208F116C00290E3F /* KYEmbedDrawerControllerSegue.swift */; };
@@ -81,9 +99,28 @@
 		2EA09255208E368200F03781 /* DrinkChopAdminUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrinkChopAdminUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EA09259208E368300F03781 /* DrinkChopAdminUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkChopAdminUITests.swift; sourceTree = "<group>"; };
 		2EA0925B208E368300F03781 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2EA8059A2093E06600FE024A /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		5FD8CC4FDD102D56F80A8F1C /* Pods_DrinkChopAdmin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DrinkChopAdmin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		870C5BD12097911300508CEA /* SocialSitesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialSitesVC.swift; sourceTree = "<group>"; };
+		870C5BD32097AD7600508CEA /* NewDrinkVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDrinkVC.swift; sourceTree = "<group>"; };
+		870C5BD52097B90800508CEA /* NewMessageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageVC.swift; sourceTree = "<group>"; };
+		870C5BD720984BF400508CEA /* CoverCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverCVC.swift; sourceTree = "<group>"; };
+		870C5BD820984BF400508CEA /* CoverCVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CoverCVC.xib; sourceTree = "<group>"; };
 		8727DFE9208FADA40079CDA0 /* DrinkTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkTVC.swift; sourceTree = "<group>"; };
 		8727DFEA208FADA40079CDA0 /* DrinkTVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DrinkTVC.xib; sourceTree = "<group>"; };
+		8727DFEF209056350079CDA0 /* BourbonVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BourbonVC.swift; sourceTree = "<group>"; };
+		8727DFF0209056350079CDA0 /* EditDrinkVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditDrinkVC.swift; sourceTree = "<group>"; };
+		8727DFF1209056350079CDA0 /* ServingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServingVC.swift; sourceTree = "<group>"; };
+		8727DFF5209056A20079CDA0 /* HyveDrinkCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HyveDrinkCVC.swift; sourceTree = "<group>"; };
+		8727DFF6209056A20079CDA0 /* HyveDrinkCVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HyveDrinkCVC.xib; sourceTree = "<group>"; };
+		873072EE20BB521F00376444 /* AddEventHourVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEventHourVC.swift; sourceTree = "<group>"; };
+		8736E4D8209ABCA00033B4A9 /* BartenderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BartenderVC.swift; sourceTree = "<group>"; };
+		8736E4DA209ABD680033B4A9 /* OrdersTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrdersTVC.xib; sourceTree = "<group>"; };
+		8736E4DB209ABD690033B4A9 /* OrdersTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrdersTVC.swift; sourceTree = "<group>"; };
+		874837C8209973CC0079AC17 /* AddEmployeeVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddEmployeeVC.swift; sourceTree = "<group>"; };
+		875B657C209CDDB200D9764A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		875B657E209DD9A800D9764A /* DrinkChopAdmin.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DrinkChopAdmin.entitlements; sourceTree = "<group>"; };
+		875B657F209DE12400D9764A /* NotificationsUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsUtil.swift; sourceTree = "<group>"; };
 		87CD793B208F115800290E3F /* KYDrawerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYDrawerController.swift; sourceTree = "<group>"; };
 		87CD793D208F116C00290E3F /* KYEmbedMainControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYEmbedMainControllerSegue.swift; sourceTree = "<group>"; };
 		87CD793E208F116C00290E3F /* KYEmbedDrawerControllerSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KYEmbedDrawerControllerSegue.swift; sourceTree = "<group>"; };
@@ -172,6 +209,8 @@
 		2EA09238208E367300F03781 /* DrinkChopAdmin */ = {
 			isa = PBXGroup;
 			children = (
+				875B657E209DD9A800D9764A /* DrinkChopAdmin.entitlements */,
+				2EA09239208E367600F03781 /* AppDelegate.swift */,
 				87CD793A208F108000290E3F /* Storyboard Files */,
 				87CD7939208F107600290E3F /* Manager */,
 				87CD7938208F105E00290E3F /* TextField Validator */,
@@ -181,8 +220,8 @@
 				87CD7933208F0DDC00290E3F /* Controllers */,
 				87CD7932208F0DD400290E3F /* Models */,
 				87CD7931208F0DBF00290E3F /* Views */,
-				2EA09239208E367600F03781 /* AppDelegate.swift */,
 				2EA09240208E367800F03781 /* Assets.xcassets */,
+				875B657C209CDDB200D9764A /* GoogleService-Info.plist */,
 				2EA09245208E367900F03781 /* Info.plist */,
 			);
 			path = DrinkChopAdmin;
@@ -209,6 +248,10 @@
 		87CD7931208F0DBF00290E3F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8736E4DB209ABD690033B4A9 /* OrdersTVC.swift */,
+				8736E4DA209ABD680033B4A9 /* OrdersTVC.xib */,
+				8727DFF5209056A20079CDA0 /* HyveDrinkCVC.swift */,
+				8727DFF6209056A20079CDA0 /* HyveDrinkCVC.xib */,
 				87CD7971208F99C900290E3F /* MessageCell.swift */,
 				87CD7972208F99C900290E3F /* MessageCell.xib */,
 				87CD796E208F99C100290E3F /* ChatCVC.swift */,
@@ -219,6 +262,8 @@
 				87CD795C208F3B5200290E3F /* PeopleDoorCVC.xib */,
 				8727DFE9208FADA40079CDA0 /* DrinkTVC.swift */,
 				8727DFEA208FADA40079CDA0 /* DrinkTVC.xib */,
+				870C5BD720984BF400508CEA /* CoverCVC.swift */,
+				870C5BD820984BF400508CEA /* CoverCVC.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -226,6 +271,7 @@
 		87CD7932208F0DD400290E3F /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2EA8059A2093E06600FE024A /* Models.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -233,6 +279,10 @@
 		87CD7933208F0DDC00290E3F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				874837C8209973CC0079AC17 /* AddEmployeeVC.swift */,
+				8727DFEF209056350079CDA0 /* BourbonVC.swift */,
+				8727DFF0209056350079CDA0 /* EditDrinkVC.swift */,
+				870C5BD52097B90800508CEA /* NewMessageVC.swift */,
 				87CD7969208F99B100290E3F /* MessageDetailsVC.swift */,
 				87CD796A208F99B100290E3F /* MessagesViewController.swift */,
 				87CD7967208F942000290E3F /* ForgotVC.swift */,
@@ -246,6 +296,11 @@
 				87CD7975208FA7C500290E3F /* BaseLineSelectionVC.swift */,
 				87CD7977208FA7D500290E3F /* BaselineVC.swift */,
 				87CD7979208FA7E100290E3F /* SelectionVC.swift */,
+				870C5BD12097911300508CEA /* SocialSitesVC.swift */,
+				870C5BD32097AD7600508CEA /* NewDrinkVC.swift */,
+				8727DFF1209056350079CDA0 /* ServingVC.swift */,
+				8736E4D8209ABCA00033B4A9 /* BartenderVC.swift */,
+				873072EE20BB521F00376444 /* AddEventHourVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -293,6 +348,7 @@
 		87CD7939208F107600290E3F /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				875B657F209DE12400D9764A /* NotificationsUtil.swift */,
 				87CD794F208F11ED00290E3F /* Manager.swift */,
 			);
 			path = Manager;
@@ -390,13 +446,21 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Mahnoor Fatima";
 				TargetAttributes = {
 					2EA09235208E367100F03781 = {
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 0930;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					2EA09249208E368000F03781 = {
 						CreatedOnToolsVersion = 9.0;
@@ -436,12 +500,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				87CD796F208F99C100290E3F /* ChatCVC.xib in Resources */,
+				8727DFF8209056A20079CDA0 /* HyveDrinkCVC.xib in Resources */,
 				87CD7955208F16BB00290E3F /* AccountCVC.xib in Resources */,
 				8727DFEC208FADA40079CDA0 /* DrinkTVC.xib in Resources */,
 				2EA09244208E367800F03781 /* LaunchScreen.storyboard in Resources */,
+				875B657D209CDDB200D9764A /* GoogleService-Info.plist in Resources */,
+				8736E4DC209ABD690033B4A9 /* OrdersTVC.xib in Resources */,
 				2EA09241208E367800F03781 /* Assets.xcassets in Resources */,
 				2EA0923F208E367700F03781 /* Main.storyboard in Resources */,
 				87CD7974208F99C900290E3F /* MessageCell.xib in Resources */,
+				870C5BDA20984BF400508CEA /* CoverCVC.xib in Resources */,
 				87CD795E208F3B5200290E3F /* PeopleDoorCVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -561,16 +629,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				87CD795A208F39A500290E3F /* StatsVC.swift in Sources */,
+				873072EF20BB521F00376444 /* AddEventHourVC.swift in Sources */,
 				87CD7940208F116C00290E3F /* KYEmbedDrawerControllerSegue.swift in Sources */,
 				87CD7947208F118E00290E3F /* AlamofireRequestFetch.swift in Sources */,
+				8727DFF7209056A20079CDA0 /* HyveDrinkCVC.swift in Sources */,
+				8727DFF3209056360079CDA0 /* EditDrinkVC.swift in Sources */,
 				87CD7970208F99C100290E3F /* ChatCVC.swift in Sources */,
+				8736E4D9209ABCA00033B4A9 /* BartenderVC.swift in Sources */,
 				87CD793F208F116C00290E3F /* KYEmbedMainControllerSegue.swift in Sources */,
 				87CD7960208F437800290E3F /* TemplateVC.swift in Sources */,
+				874837C9209973CC0079AC17 /* AddEmployeeVC.swift in Sources */,
 				87CD7968208F942000290E3F /* ForgotVC.swift in Sources */,
 				87CD796C208F99B100290E3F /* MessagesViewController.swift in Sources */,
+				8736E4DD209ABD690033B4A9 /* OrdersTVC.swift in Sources */,
 				87CD796B208F99B100290E3F /* MessageDetailsVC.swift in Sources */,
 				87CD7946208F118E00290E3F /* Maps.swift in Sources */,
+				8727DFF2209056360079CDA0 /* BourbonVC.swift in Sources */,
 				87CD7956208F16BB00290E3F /* AccountCVC.swift in Sources */,
+				870C5BD22097911300508CEA /* SocialSitesVC.swift in Sources */,
 				87CD7976208FA7C500290E3F /* BaseLineSelectionVC.swift in Sources */,
 				87CD7966208F929C00290E3F /* AccountDetailsVC.swift in Sources */,
 				87CD793C208F115800290E3F /* KYDrawerController.swift in Sources */,
@@ -583,13 +659,19 @@
 				8727DFEB208FADA40079CDA0 /* DrinkTVC.swift in Sources */,
 				87CD7950208F11EE00290E3F /* Manager.swift in Sources */,
 				87CD7948208F118E00290E3F /* Custom Functions.swift in Sources */,
+				875B6580209DE12400D9764A /* NotificationsUtil.swift in Sources */,
+				870C5BD62097B90800508CEA /* NewMessageVC.swift in Sources */,
+				8727DFF4209056360079CDA0 /* ServingVC.swift in Sources */,
 				87CD794E208F11B200290E3F /* TextFieldValidator.m in Sources */,
 				87CD7962208F5B8300290E3F /* EmployeeVC.swift in Sources */,
+				870C5BD920984BF400508CEA /* CoverCVC.swift in Sources */,
 				2EA0923C208E367600F03781 /* ViewController.swift in Sources */,
 				2EA0923A208E367600F03781 /* AppDelegate.swift in Sources */,
+				870C5BD42097AD7600508CEA /* NewDrinkVC.swift in Sources */,
 				87CD7958208F2AA700290E3F /* MyAccountVC.swift in Sources */,
 				87CD7964208F8EFF00290E3F /* DoormanVC.swift in Sources */,
 				87CD7978208FA7D500290E3F /* BaselineVC.swift in Sources */,
+				2EA8059B2093E06600FE024A /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -658,6 +740,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -665,6 +748,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -715,6 +799,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -722,6 +807,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -757,15 +843,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BN9Z5GD2CG;
+				CODE_SIGN_ENTITLEMENTS = DrinkChopAdmin/DrinkChopAdmin.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 272E32ABG5;
 				INFOPLIST_FILE = DrinkChopAdmin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.codeX.DrinkChopAdmin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yoewallet.DrinkChopAdmin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "c610601c-b2db-453c-b4fc-db018e37d623";
+				PROVISIONING_PROFILE_SPECIFIER = DrinkChopAdminStoreProfile;
 				SWIFT_OBJC_BRIDGING_HEADER = "DrinkChopAdmin/TextField Validator/DrinkChopAdmin-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -779,15 +867,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = BN9Z5GD2CG;
+				CODE_SIGN_ENTITLEMENTS = DrinkChopAdmin/DrinkChopAdmin.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 272E32ABG5;
 				INFOPLIST_FILE = DrinkChopAdmin/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.codeX.DrinkChopAdmin;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yoewallet.DrinkChopAdmin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "c610601c-b2db-453c-b4fc-db018e37d623";
+				PROVISIONING_PROFILE_SPECIFIER = DrinkChopAdminStoreProfile;
 				SWIFT_OBJC_BRIDGING_HEADER = "DrinkChopAdmin/TextField Validator/DrinkChopAdmin-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;

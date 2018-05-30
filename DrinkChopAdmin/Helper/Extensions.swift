@@ -8,6 +8,53 @@
 
 import UIKit
 
+extension UIViewController {
+    func showToast(message : String) {
+        let _size = message.heightWithConstrainedWidth(width: self.view.frame.width-40, font: UIFont.systemFont(ofSize: 12.0))
+        let toastLabel = UILabel(frame: CGRect(x: 0, y: self.view.frame.size.height-100, width: _size.width + 10, height: 35))
+        toastLabel.center.x = self.view.center.x
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.textAlignment = .center;
+        toastLabel.font = UIFont.systemFont(ofSize: 12.0)
+        toastLabel.text = message
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds  =  true
+        self.view.addSubview(toastLabel)
+        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
+            toastLabel.alpha = 0.0
+        }, completion: {(isCompleted) in
+            toastLabel.removeFromSuperview()
+        })
+    }
+    
+    static var NoDataView = UILabel()
+    
+    func setNoDataView() {
+        UIViewController.NoDataView.frame = self.view.bounds
+        UIViewController.NoDataView.font = UIFont.boldSystemFont(ofSize: 30.0)
+        UIViewController.NoDataView.textAlignment = .center
+        UIViewController.NoDataView.textColor = appTintColor
+        UIViewController.NoDataView.backgroundColor = UIColor.white
+        self.view.addSubview(UIViewController.NoDataView)
+        self.hideNoDataView()
+    }
+    
+    func showDataView(text: String) {
+        UIViewController.NoDataView.isHidden = false
+        UIViewController.NoDataView.text = text
+    }
+    
+    func hideNoDataView() {
+        UIViewController.NoDataView.isHidden = true
+    }
+    
+    func removeNoDataView() {
+        UIViewController.NoDataView.removeFromSuperview()
+    }
+    
+}
 
 extension UIView {
     
@@ -156,6 +203,7 @@ extension String {
     var dateFromISO8601: Date? {
         return Formatter.iso8601.date(from: self)   // "Mar 22, 2017, 10:22 AM"
     }
+    
 }
 
 
@@ -169,6 +217,7 @@ extension Formatter {
         return formatter
     }()
     
+    
     static let humanReadableDate: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -176,6 +225,7 @@ extension Formatter {
         formatter.timeStyle = .short
         return formatter
     }()
+    
     
     static let humanReadableTime: DateFormatter = {
         let formatter = DateFormatter()
@@ -229,6 +279,59 @@ extension Double {
 
 extension Date {
     
+    var startOfWeek: Date? {
+        let gregorian = Calendar(identifier: .gregorian)
+        guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else { return nil }
+        return gregorian.date(byAdding: .day, value: 1, to: sunday)
+    }
+    
+    var endOfWeek: Date? {
+        let gregorian = Calendar(identifier: .gregorian)
+        guard let sunday = gregorian.date(from: gregorian.dateComponents([.yearForWeekOfYear, .weekOfYear], from: self)) else { return nil }
+        return gregorian.date(byAdding: .day, value: 7, to: sunday)
+    }
+    
+    func generateDatesArrayBetweenTwoDates(endDate:Date) ->[Date] {
+        var datesArray: [Date] =  []
+        var startDate = self
+        let calendar = Calendar.current
+        
+        let fmt = DateFormatter()
+        fmt.dateFormat = "dd-MM-yyyy"
+        
+        while startDate <= endDate {
+            datesArray.append(startDate)
+            print(fmt.string(from: startDate))
+            startDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
+        }
+        return datesArray
+    }
+    
+    func isInSameWeek(date: Date) -> Bool {
+        return Calendar.current.isDate(self, equalTo: date, toGranularity: .weekOfYear)
+    }
+    func isInSameMonth(date: Date) -> Bool {
+        return Calendar.current.isDate(self, equalTo: date, toGranularity: .month)
+    }
+    func isInSameYear(date: Date) -> Bool {
+        return Calendar.current.isDate(self, equalTo: date, toGranularity: .year)
+    }
+    func isInSameDay(date: Date) -> Bool {
+        return Calendar.current.isDate(self, equalTo: date, toGranularity: .day)
+    }
+    var isInThisWeek: Bool {
+        return isInSameWeek(date: Date())
+    }
+    var isInToday: Bool {
+        return Calendar.current.isDateInToday(self)
+    }
+    var isInTheFuture: Bool {
+        return Date() < self
+    }
+    var isInThePast: Bool {
+        return self < Date()
+    }
+    
     var age: Int {
         return Calendar.current.dateComponents([.year], from: self, to: Date()).year!
     }
@@ -248,6 +351,7 @@ extension Date {
     var humanReadableTime: String {
         return Formatter.humanReadableTime.string(from: self)
     }
+    
     
     var serverSideDate: String {
         return Formatter.serverDateFormatter.string(from: self)

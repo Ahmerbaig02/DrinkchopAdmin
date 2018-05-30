@@ -8,21 +8,28 @@
 
 import UIKit
 
+protocol DrinkTVCDelegate: class {
+    func selectItem(cell: DrinkTVC, indexPath: IndexPath)
+}
+
 class DrinkTVC: UITableViewCell {
 
     @IBOutlet var selectionImgView:UIImageView!
     @IBOutlet var titleLbl:UILabel!
     
+    weak var delegate: DrinkTVCDelegate?
+    
+    var indexPath: IndexPath!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        
+        self.selectionImgView.isUserInteractionEnabled = true
+        self.selectionImgView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(selectItemAction)))
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        
+    
+    @objc func selectItemAction() {
+        delegate?.selectItem(cell: self, indexPath: self.indexPath)
     }
     
 }

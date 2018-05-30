@@ -15,15 +15,39 @@ class MessagesViewController: UIViewController {
     
     @IBOutlet var messagesTable:UITableView!
     
+    var notificationData:[String:Any]!
+    
     var title_color:UIColor = appTintColor
     var readTintColor:UIColor = UIColor(red: 28/255, green: 144/255, blue: 91/255, alpha: 1.0)
 
-    var users:[String] = ["Ahmer Baig", "Ali Baig" ,"Ali Hassan Jutt", "Husnain Jutt", "Safeer Baig", "Irtiza Ali"]
+    var selectedContact:DrinkUser!
+    
+    fileprivate var uniqueRecipents:[String] = []
+    var users:[[DrinkMessage]] = []
+    var allMessages:[DrinkMessage] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        //saveMessageDataInDB()
         
         registerCell()
+        
+        if DrinkUser.iUser.userType != "0" {
+            self.navigationItem.rightBarButtonItem = nil
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationsUtil.setSuperView(navController: self.navigationController!)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationsUtil.removeFromSuperView()
     }
     
     override func viewWillLayoutSubviews() {
@@ -33,10 +57,109 @@ class MessagesViewController: UIViewController {
         self.peopleDoorView.giveShadow(cornerRaius: 5)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        performDidApearThings()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? MessageDetailsVC {
             let index = sender as! Int
+            print("index: ",index)
+            controller.recipentEmail = self.uniqueRecipents[index]
+            controller.allMessages = self.allMessages
+            if index >= 0 && self.users.count > 0 {
+                controller.messages = self.users[index]
+            }
         }
+    }
+    
+    func performDidApearThings() {
+        if self.selectedContact != nil {
+            print(self.selectedContact.userName!)
+            if self.uniqueRecipents.contains(where: {$0 == self.selectedContact.userEmail}) {
+                let index = self.uniqueRecipents.index(where: {$0 == self.selectedContact.userEmail})!
+                self.performSegue(withIdentifier: MessageDetailsSegueID, sender: index)
+            } else {
+                self.uniqueRecipents.append(self.selectedContact.userEmail!)
+                self.performSegue(withIdentifier: MessageDetailsSegueID, sender: self.uniqueRecipents.count-1)
+            }
+            self.selectedContact = nil
+        }
+        getMessagesData()
+        
+        if notificationData != nil {
+            var messageData:DrinkMessage!
+            if (notificationData["choice"] as! String) == "Doctor" {
+                messageData = parseDoctorMessage(data: notificationData)
+            } else {
+                messageData = parsePatientMessage(data: notificationData)
+            }
+            self.allMessages.append(messageData)
+            self.saveMessageDataInDB()
+            if self.uniqueRecipents.contains(where: {$0 == messageData.email || $0 == messageData.recipentEmail}) {
+                let index = self.uniqueRecipents.index(where: {$0 == messageData.email || $0 == messageData.recipentEmail})!
+                self.performSegue(withIdentifier: MessageDetailsSegueID, sender: index)
+            } else {
+                self.uniqueRecipents.append(messageData.recipentEmail!)
+                self.performSegue(withIdentifier: MessageDetailsSegueID, sender: self.uniqueRecipents.count-1)
+            }
+            self.notificationData = nil
+        }
+    }
+    
+    
+    func saveMessageDataInDB() {
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        guard let data = try? encoder.encode(self.allMessages) else {return}
+        
+        UserDefaults.standard.set(data, forKey: messagesDefaultID)
+    }
+    
+    func parseDoctorMessage(data: [String:Any]) -> DrinkMessage {
+        var newMessage = DrinkMessage()
+        newMessage.email = DrinkUser.iUser.userEmail!
+        newMessage.name = DrinkUser.iUser.userName!
+        newMessage.recipentEmail = data["d_email"] as? String ?? ""
+        newMessage.recipentName = data["d_name"] as? String ?? ""
+        newMessage.message = data["body"] as? String ?? ""
+        newMessage.title = data["title"] as? String ?? ""
+        newMessage.recipentImage = data["d_image"] as? String ?? ""
+        newMessage.date = data["date"] as? String ?? ""
+        return newMessage
+    }
+    
+    func parsePatientMessage(data: [String:Any]) -> DrinkMessage {
+        var newMessage = DrinkMessage()
+        newMessage.email = DrinkUser.iUser.userEmail!
+        newMessage.name = DrinkUser.iUser.userName!
+        newMessage.recipentEmail = data["p_email"] as? String ?? ""
+        newMessage.recipentName = data["p_name"] as? String ?? ""
+        newMessage.message = data["body"] as? String ?? ""
+        newMessage.title = data["title"] as? String ?? ""
+        newMessage.recipentImage = data["p_image"] as? String ?? ""
+        newMessage.date = data["date"] as? String ?? ""
+        return newMessage
+    }
+    
+    func getMessagesData() {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        guard let data  = UserDefaults.standard.data(forKey: messagesDefaultID) else {return}
+        guard let messages = try? decoder.decode([DrinkMessage].self, from: data) else {return}
+        
+        self.allMessages = messages
+        
+        uniqueRecipents = Array(Set(self.allMessages.map({$0.recipentEmail!})))
+        uniqueRecipents = uniqueRecipents.filter({$0 != ""})
+        self.users.removeAll(keepingCapacity: false)
+        for recp in uniqueRecipents {
+            let recipentMessages = allMessages.filter({ $0.recipentEmail == recp || $0.email == recp })
+            self.users.append(recipentMessages)
+        }
+        self.messagesTable.reloadData()
     }
     
     func registerCell() {
@@ -81,8 +204,8 @@ extension MessagesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: messageCellID, for: indexPath) as! MessageCell
-        cell.MessageLabel.attributedText = getAttributedText(Titles: [users[indexPath.row] ,"Hi How are you?"], Font: [.boldSystemFont(ofSize: 14.0),.systemFont(ofSize: 11.0, weight: UIFont.Weight.medium)], Colors: [title_color,.gray], seperator: ["\n",""], Spacing: 0, atIndex: -1)
-        cell.timeLabel.attributedText = timeAttributedTextWithImageAttachment(timeText: ("12/11/2017"))
+        cell.MessageLabel.attributedText = getAttributedText(Titles: [users[indexPath.row][0].name! ,users[indexPath.row][0].message!], Font: [.boldSystemFont(ofSize: 14.0),.systemFont(ofSize: 11.0, weight: UIFont.Weight.medium)], Colors: [title_color,.gray], seperator: ["\n",""], Spacing: 0, atIndex: -1)
+        cell.timeLabel.attributedText = timeAttributedTextWithImageAttachment(timeText: users[indexPath.row][0].date!)
         return cell
     }
     

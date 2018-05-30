@@ -18,6 +18,12 @@ class MessageDetailsVC: UIViewController {
     
     fileprivate var sizingCell:ChatCVC!
     
+    var recipentEmail:String!
+    
+    var messages:[DrinkMessage] = []
+    
+    var allMessages:[DrinkMessage] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,9 +33,16 @@ class MessageDetailsVC: UIViewController {
         registerCells()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationsUtil.setSuperView(navController: self.navigationController!)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        NotificationsUtil.removeFromSuperView()
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -50,9 +63,81 @@ class MessageDetailsVC: UIViewController {
         self.sizingCell = chatCellNib.instantiate(withOwner: self, options: nil).first as! ChatCVC
     }
     
+    func saveMessageDataInDB() {
+        let encoder = JSONEncoder()
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        guard let data = try? encoder.encode(self.allMessages) else {return}
+        
+        UserDefaults.standard.set(data, forKey: messagesDefaultID)
+    }
+    
+    
+    func updateMessagesData(messageTitle: String) {
+        var newMessage = DrinkMessage()
+        newMessage.email = DrinkUser.iUser.userEmail!
+        newMessage.name = DrinkUser.iUser.userName!
+        newMessage.recipentEmail = self.recipentEmail
+        newMessage.recipentName = self.recipentEmail
+        newMessage.message = self.messageTextView.text!
+        newMessage.title = messageTitle
+        newMessage.recipentImage = self.recipentEmail
+        newMessage.date = Date().humanReadableDate
+        self.messages.append(newMessage)
+        self.allMessages.append(newMessage)
+        self.saveMessageDataInDB()
+        self.chatCollectionView.reloadData()
+        self.messageTextView.resignFirstResponder()
+        self.messageTextView.text = ""
+    }
+    
+    func sendMessageForDoctor() {
+        Manager.showLoader(text: "Please Wait...", view: self.view)
+        let params:[String: Any] = ["message": self.messageTextView.text!,
+                                    "Patient_Email": recipentEmail,
+                                    "check":1,
+                                    "D_Email": DrinkUser.iUser.userName!,
+                                    "D_Name": DrinkUser.iUser.userEmail!,
+                                    "D_Image": DrinkUser.iUser.userImage!,
+                                    "Date": Date().humanReadableDate]
+        Manager.sendDocMessageFromServer(params: params) { [weak self] (success) in
+            Manager.hideLoader()
+            if let success = success {
+                self!.updateMessagesData(messageTitle: "Patient Message")
+            } else {
+                self!.showToast(message: "Message Sending Failed")
+                print("error sending doc message")
+            }
+        }
+    }
+    
+    func sendMessageForPatient() {
+        Manager.showLoader(text: "Please Wait...", view: self.view)
+        let params:[String: Any] = ["message": self.messageTextView.text!,
+                                    "Doctor_Email": recipentEmail,
+                                    "check":1,
+                                    "P_Email": DrinkUser.iUser.userEmail!,
+                                    "P_Name": DrinkUser.iUser.userName!,
+                                    "P_Image": DrinkUser.iUser.userImage!,
+                                    "Date": Date().humanReadableDate]
+        Manager.sendPatientMessageFromServer(params: params) { [weak self] (success) in
+            Manager.hideLoader()
+            if let success = success {
+                self!.updateMessagesData(messageTitle: "Doctor Message")
+            } else {
+                self!.showToast(message: "Message Sending Failed")
+                print("error sending doc message")
+            }
+        }
+    }
+    
     // MARK: - Actions
     @IBAction func messageSendAction(_ sender: Any) {
         self.sendMessageBtn.isEnabled = false
+        if DrinkUser.iUser.userType != "0" {
+            sendMessageForPatient()
+        } else {
+            sendMessageForDoctor()
+        }
     }
     
     deinit {
@@ -99,28 +184,28 @@ extension MessageDetailsVC: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return messages.count
     }
     
     func configureChatCell(cell: ChatCVC, index: Int) {
-        let currentChatMessage = "Material icons are beautifully crafted, delightful, and easy to use in your web, Android, and iOS projects. Learn more about material design and our process for making these icons in the system icons section of the material design guidelines."
+        let currentChatMessage = self.messages[index].message!
         let cellChatSize = currentChatMessage.heightWithConstrainedWidth(width: 250, font: UIFont.systemFont(ofSize: 14.0, weight: UIFont.Weight.medium))
         cell.chatMessageLabel.textColor = UIColor.white
         cell.chatMessageLabel.text = currentChatMessage
-        if arc4random() % 3 == 0 {
+        if self.messages[index].email != DrinkUser.iUser.userEmail {
             cell.chatMessageLabel.frame = CGRect(x: 16, y: 0, width: cellChatSize.width+16, height: cellChatSize.height+20)
             cell.chatBGView.frame = CGRect(x: 8, y: 0, width: cellChatSize.width+24, height: cellChatSize.height+20)
             cell.dateTimeLbl.textAlignment = .right
-            cell.dateTimeLbl.frame = CGRect(x: 8, y: cellChatSize.height+24, width: cellChatSize.width+24, height: 20)
+            cell.dateTimeLbl.frame = CGRect(x: 0, y: cellChatSize.height+24, width: 150, height: 20)
             cell.chatBGView.backgroundColor = UIColor.lightGray
         } else {
             cell.chatMessageLabel.frame = CGRect(x: view.frame.width - cellChatSize.width - 32, y: 0, width: cellChatSize.width+16, height: cellChatSize.height+16)
             cell.chatBGView.frame = CGRect(x: view.frame.width - cellChatSize.width - 40, y: 0, width: cellChatSize.width+24, height: cellChatSize.height+16)
-            cell.dateTimeLbl.frame = CGRect(x: view.frame.width - cellChatSize.width - 40, y: cellChatSize.height+20, width: cellChatSize.width+24, height: 20)
+            cell.dateTimeLbl.frame = CGRect(x: view.frame.width - 160, y: cellChatSize.height+20, width: 150, height: 20)
             cell.dateTimeLbl.textAlignment = .right
             cell.chatBGView.backgroundColor = appTintColor
         }
-        cell.dateTimeLbl.text = "10:0\(index) PM"
+        cell.dateTimeLbl.text = self.messages[index].date!
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -135,7 +220,7 @@ extension MessageDetailsVC: UICollectionViewDelegate, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellWidth:CGFloat = 250.0
-        let currentChatMessage = "Material icons are beautifully crafted, delightful, and easy to use in your web, Android, and iOS projects. Learn more about material design and our process for making these icons in the system icons section of the material design guidelines."
+        let currentChatMessage = self.messages[indexPath.row].message!
         let cellChatSize = currentChatMessage.heightWithConstrainedWidth(width: cellWidth, font: UIFont.systemFont(ofSize: 14.0, weight: UIFont.Weight.medium))
         return CGSize(width: self.view.frame.width, height: cellChatSize.height + 40)
     }

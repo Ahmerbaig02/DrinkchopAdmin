@@ -33,6 +33,18 @@ class DoormanVC: UIViewController {
         registerCell()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NotificationsUtil.setSuperView(navController: self.navigationController!)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationsUtil.removeFromSuperView()
+    }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
@@ -41,6 +53,9 @@ class DoormanVC: UIViewController {
         
         self.userImgView.getRounded(cornerRaius: self.userImgView.frame.width/2)
         self.userImgView.layer.borderColor = UIColor.darkGray.cgColor
+        
+        self.nameLbl.getRounded(cornerRaius: 5)
+        self.nameLbl.giveShadow(cornerRaius: 5)
     }
     
     func registerCell() {
